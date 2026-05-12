@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <article>
+        <h1>{{ post.title }}</h1>
+        <p><strong>Published:</strong> {{ post.created_at|date:"F j, Y, g:i a" }}</p>
+        <p><strong>Last updated:</strong> {{ post.updated_at|date:"F j, Y, g:i a" }}</p>
+        <div class="content">
+            {{ post.content|linebreaks }}
+        </div>
+        <a href="/">← Back to all posts</a>
+    </article>
+{% endblock %}

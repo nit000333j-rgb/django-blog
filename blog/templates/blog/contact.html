@@ -1,0 +1,92 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="hero">
+    <h1 class="glitch">Contact Us</h1>
+    <p>Let's build something amazing together</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <!-- Contact Form -->
+    <div class="single-post">
+        <h2 style="color: #00ccff; margin-bottom: 1.5rem;">Send us a message</h2>
+        
+        <form method="post" action="#">
+            {% csrf_token %}
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: rgba(255,255,255,0.8);">Full Name</label>
+                <input type="text" name="name" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: white;">
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: rgba(255,255,255,0.8);">Email Address</label>
+                <input type="email" name="email" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: white;">
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: rgba(255,255,255,0.8);">Subject</label>
+                <input type="text" name="subject" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: white;">
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: rgba(255,255,255,0.8);">Message</label>
+                <textarea name="message" rows="5" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: white;"></textarea>
+            </div>
+            
+            <button type="submit" class="read-more" style="border: none; cursor: pointer;">
+                Send Message <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+    
+    <!-- Contact Information -->
+    <div class="single-post">
+        <h2 style="color: #00ccff; margin-bottom: 1.5rem;">Get in touch</h2>
+        
+        <div style="margin-bottom: 2rem;">
+            <p style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; color: #ff3366;"></i>
+                <span>123 Tech Park, Silicon Valley, CA 94025</span>
+            </p>
+            <p style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                <i class="fas fa-phone" style="font-size: 1.5rem; color: #ff3366;"></i>
+                <span>+1 (555) 123-4567</span>
+            </p>
+            <p style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                <i class="fas fa-envelope" style="font-size: 1.5rem; color: #ff3366;"></i>
+                <span>hello@nexus.com</span>
+            </p>
+        </div>
+        
+        <h3 style="color: #00ccff; margin-bottom: 1rem;">Business Hours</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.5rem;">Monday - Friday: 9:00 AM - 6:00 PM</li>
+            <li style="margin-bottom: 0.5rem;">Saturday: 10:00 AM - 4:00 PM</li>
+            <li>Sunday: Closed</li>
+        </ul>
+        
+        <div style="margin-top: 2rem;">
+            <h3 style="color: #00ccff; margin-bottom: 1rem;">Follow Us</h3>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;"><i class="fab fa-linkedin"></i></a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;"><i class="fab fa-github"></i></a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s;"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @media (max-width: 768px) {
+        div[style*="display: grid"] {
+            grid-template-columns: 1fr !important;
+        }
+    }
+    
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: #ff3366 !important;
+    }
+</style>
+{% endblock %}
