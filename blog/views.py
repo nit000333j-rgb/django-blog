@@ -10,6 +10,11 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = post.comments.all()
     
+def about(request):
+     return render(request, 'blog/about.html') 
+
+def contact(request):
+    return render(request, 'blog/contact.html')
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -25,8 +30,3 @@ def post_detail(request, pk):
         'comments': comments,
         'form': form,
     })
-def about(request):
-    return render(request, 'blog/about.html')
-
-def contact(request):
-    return render(request, 'blog/contact.html')
