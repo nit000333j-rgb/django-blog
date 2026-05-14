@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Nexus Blog{% endblock %}</title>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+    <title>DjangoBlog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -19,100 +14,19 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        /* Animated Gradient Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(30, 30, 60, 0.4) 0%, rgba(10, 10, 10, 0.95) 100%),
-                        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 8px);
-            pointer-events: none;
-            z-index: -2;
-        }
-
-        /* Floating Orbs Animation */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-            pointer-events: none;
-            z-index: -1;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: #ff3366;
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: #00ccff;
-            bottom: -150px;
-            right: -150px;
-            animation-delay: 5s;
-        }
-
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: #9933ff;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-        }
-
-        /* Custom Cursor */
-       
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.5); opacity: 1; }
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fa;
+            color: #2d3748;
+            line-height: 1.6;
         }
 
         /* Navigation */
         .navbar {
-            position: fixed;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
             top: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(10, 10, 10, 0.95);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .nav-container {
@@ -125,357 +39,248 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            font-family: 'Space Grotesk', monospace;
-            background: linear-gradient(135deg, #ff3366, #00ccff, #9933ff);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientShift 3s infinite;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4a5568;
             text-decoration: none;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        .logo span {
+            color: #4299e1;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
-            list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #ffffff;
+            color: #4a5568;
             font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #ff3366, #00ccff);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::before {
-            width: 100%;
+            transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: #00ccff;
+            color: #4299e1;
         }
 
-        /* Main Container */
+        /* Container */
         .container {
-            max-width: 1000px;
-            margin: 100px auto 50px;
-            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 4rem 2rem;
-            margin-bottom: 3rem;
-            animation: fadeInUp 0.8s ease;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            color: white;
         }
 
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            font-family: 'Space Grotesk', monospace;
-            background: linear-gradient(135deg, #ffffff, #00ccff, #ff3366);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientShift 3s infinite;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
-        /* Blog Cards */
+        /* Post Cards */
         .post {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            background: white;
+            border-radius: 12px;
             padding: 2rem;
             margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 0.6s ease;
-            animation-fill-mode: both;
-        }
-
-        .post:nth-child(1) { animation-delay: 0.1s; }
-        .post:nth-child(2) { animation-delay: 0.2s; }
-        .post:nth-child(3) { animation-delay: 0.3s; }
-        .post:nth-child(4) { animation-delay: 0.4s; }
-        .post:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .post::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .post:hover::before {
-            left: 100%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .post:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 51, 102, 0.5);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .post-title {
             font-size: 1.8rem;
-            font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff, #00ccff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        }
+
+        .post-title a {
+            color: #2d3748;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .post-title a:hover {
+            color: #4299e1;
         }
 
         .post-meta {
-            color: rgba(255,255,255,0.6);
+            color: #718096;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .post-meta i {
             margin-right: 0.5rem;
-            color: #ff3366;
+        }
+
+        .post-meta span {
+            margin-right: 1.5rem;
         }
 
         .post-excerpt {
-            color: rgba(255,255,255,0.8);
-            line-height: 1.8;
+            color: #4a5568;
             margin-bottom: 1.5rem;
-        }
-
-        .read-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, #ff3366, #ff6699);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .read-more::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .read-more:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .read-more:hover {
-            gap: 1rem;
-            transform: translateX(5px);
-        }
-
-        /* Single Post Page */
-        .single-post {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeInUp 0.6s ease;
-        }
-
-        .single-post h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            font-family: 'Space Grotesk', monospace;
-            background: linear-gradient(135deg, #ffffff, #00ccff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
         }
 
         .post-content {
+            color: #4a5568;
             font-size: 1.1rem;
             line-height: 1.8;
-            color: rgba(255,255,255,0.9);
-            margin: 2rem 0;
         }
 
-        .post-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #00ccff;
+        .read-more {
+            display: inline-block;
+            background: #4299e1;
+            color: white;
+            padding: 0.6rem 1.5rem;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.3s;
         }
 
-        .back-link:hover {
-            gap: 1rem;
-            color: #ff3366;
+        .read-more:hover {
+            background: #3182ce;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .comments-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #2d3748;
+        }
+
+        .comment {
+            background: #f7fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .comment strong {
+            color: #2d3748;
+        }
+
+        .comment p {
+            margin: 0.5rem 0;
+            color: #4a5568;
+        }
+
+        .comment small {
+            color: #a0aec0;
+            font-size: 0.8rem;
+        }
+
+        /* Comment Form */
+        .comment-form {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .comment-form h3 {
+            margin-bottom: 1rem;
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
+
+        .btn-primary {
+            background: #4299e1;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #3182ce;
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 3rem;
-            background: rgba(10, 10, 10, 0.8);
-            margin-top: 4rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .footer p {
-            color: rgba(255,255,255,0.6);
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #ff3366, #00ccff);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #ff6699, #33ddff);
+            padding: 2rem;
+            background: white;
+            margin-top: 3rem;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
             }
             
             .post-title {
                 font-size: 1.4rem;
             }
             
-            .single-post h1 {
-                font-size: 2rem;
-            }
-            
             .container {
-                padding: 0 1rem;
-                margin-top: 80px;
+                padding: 1rem;
             }
-            
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .cursor, .cursor-follower {
-                display: none;
-            }
-        }
-
-        /* Loading Animation */
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        /* Glitch Text Effect */
-        .glitch {
-            position: relative;
-            animation: glitch 3s infinite;
-        }
-
-        @keyframes glitch {
-            0%, 100% { transform: skew(0deg, 0deg); }
-            95% { transform: skew(0deg, 0deg); }
-            96% { transform: skew(5deg, 2deg); }
-            97% { transform: skew(-5deg, -2deg); }
-            98% { transform: skew(0deg, 0deg); }
         }
     </style>
 </head>
 <body>
-
-    <!-- Floating Orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
-   
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">✦ Nit</a>
-            <ul class="nav-links">
-                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="/about/"><i class="fas fa-user-astronaut"></i> About</a></li>
-                <li><a href="/contact/"><i class="fas fa-paper-plane"></i> Contact</a></li>
-            </ul>
+            <a href="/" class="logo">Django<span>Blog</span></a>
+            <div class="nav-links">
+                <a href="{% url 'post_list' %}">Home</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+            </div>
         </div>
     </nav>
 
@@ -483,22 +288,9 @@
         {% block content %}
         {% endblock %}
     </div>
-<br><br><br><br><br><br><br><br><br><br><br>
+
     <footer class="footer">
-        <p>© 2026 Nit | Where ideas transcend reality</p>
+        <p>&copy; 2026 DjangoBlog. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-    </script>
 </body>
 </html>

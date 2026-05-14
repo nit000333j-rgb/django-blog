@@ -1,21 +1,20 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Comment
 
+# This shows comments inside the post admin page
+class CommentInline(admin.TabularInline):
+    model = Comment
+    extra = 1
+
+# Register Post model with inline comments
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_at', 'published')
-    list_editable = ('published',)
-    list_filter = ('published',)
-    ordering = ('created_at',)  # ← Add this line (note: tuple with comma)
-    actions = ['make_published', 'make_unpublished']
+    list_display = ('title', 'id')  # Only use fields that exist
+    inlines = [CommentInline]
 
-def make_published(self, request, queryset):
-    count = queryset.update(published=True)
-    self.message_user(request, f"{count} posts were published.")
-    make_published.short_description = "Publish selected posts"
-
-def make_unpublished(self, request, queryset):
-    count = queryset.update(published=False)
-    self.message_user(request, f"{count} posts were unpublished.")
-    make_unpublished.short_description = "Unpublish selected posts"
-
-admin.site.register(Post, PostAdmin)
+# Register Comment model
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'post', 'created_date')  # Only fields that exist
+    list_filter = ('created_date',)
+    search_fields = ('name', 'body')

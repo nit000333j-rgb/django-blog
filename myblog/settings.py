@@ -1,31 +1,30 @@
-# myblog/settings.py
 import os
 from pathlib import Path
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ⚠️ IMPORTANT: Change this to False for production
-DEBUG = False
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-your-secret-key-here'
 
-# Add your domain or server IP here
-ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com', 'your-server-ip']
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
 
-# Install WhiteNoise for static files
+ALLOWED_HOSTS = []
+
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',  # Add this BEFORE staticfiles
     'django.contrib.staticfiles',
-    'blog',  # Your app
+    'blog',  # Make sure it's 'blog' not 'myblog.blog' or something else
 ]
 
-# Add WhiteNoise middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -34,11 +33,58 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Static files configuration
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ CORRECT
+ROOT_URLCONF = 'myblog.urls'
 
-# Media files (if you have images)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'myblog.wsgi.application'
+
+# DATABASE - THIS IS THE IMPORTANT PART
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+# Password validation
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+# Internationalization
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_TZ = True
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = 'static/'
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
